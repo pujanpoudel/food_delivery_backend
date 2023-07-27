@@ -10,7 +10,10 @@ class ProductController extends Controller
         
     public function get_popular_products(Request $request){
   
-        $list = Food::where('type_id', 2)->take(10)->orderBy('created_at', 'DESC')->get();
+        // $list = Food::where('type_id', 2)->take(100)->orderBy('created_at', 'DESC')->get();
+        $list = Food::where('type_id', 2)->where('status', 1)->orderBy('created_at', 'DESC')->take(10)->get();
+        
+            //dd('kldjf');
         
                 foreach ($list as $item){
                     $item['description']=strip_tags($item['description']);
@@ -30,7 +33,9 @@ class ProductController extends Controller
  
     }
         public function get_recommended_products(Request $request){
-        $list = Food::where('type_id', 3)->take(10)->orderBy('created_at', 'DESC')->get();
+        // $list = Food::where('type_id', 3)->take(10)->orderBy('created_at', 'DESC')->get();
+        $list = Food::where('type_id', 3)->where('status', 1)->orderBy('created_at', 'DESC')->take(10)->get();
+
         
                 foreach ($list as $item){
                     $item['description']=strip_tags($item['description']);
@@ -69,7 +74,8 @@ class ProductController extends Controller
         // return json_decode($list);
     }
     public function get_drinks(Request $request){
-        $list = Food::where('type_id', 4)->take(10)->orderBy('created_at', 'DESC')->get();
+        // $list = Food::where('type_id', 4)->take(10)->orderBy('created_at', 'DESC')->get();
+        $list = Food::where('type_id', 4)->where('status', 1)->orderBy('created_at', 'DESC')->take(10)->get();
         
                 foreach ($list as $item){
                     $item['description']=strip_tags($item['description']);

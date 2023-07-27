@@ -33,9 +33,9 @@ class FoodsController extends AdminController
         $grid->model()->latest();
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-         $grid->column('FoodType.title', __('Category'));
+        $grid->column('FoodType.title', __('Category'));
         $grid->column('price', __('Price'));
-        //$grid->column('location', __('Location'));
+        $grid->column('status', __('Status'));
         //$grid->column('stars', __('Stars'));
         $grid->column('img', __('Thumbnail Photo'))->image('',60,60);
         $grid->column('description', __('Description'))->style('max-width:200px;word-break:break-all;')->display(function ($val){
@@ -73,12 +73,12 @@ class FoodsController extends AdminController
     {
         $form = new Form(new Food());
         $form->text('name', __('Name'));
-          $form->select('type_id', __('Type_id'))->options((new FoodType())::selectOptions());
+        $form->select('type_id', __('Type_id'))->options((new FoodType())::selectOptions());
         $form->number('price', __('Price'));
-        //$form->text('location', __('Location'));
-        //$form->number('stars', __('Stars'));
+        // $form->text('location', __('Location'));
+        $form->select('status', __('Status'))->options(['not available','available']);
         //$form->number('people', __('People'));
-        //$form->number('selected_people', __('Selected'));
+        // $form->number('selected_people', __('Selected'));
         $form->image('img', __('Thumbnail'))->uniqueName();
         //$form->UEditor('description','Description');
         $form->text('description','Description');

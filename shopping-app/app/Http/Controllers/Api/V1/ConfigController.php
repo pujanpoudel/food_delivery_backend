@@ -55,10 +55,10 @@ class ConfigController extends Controller
         //return response()->json(['message'=>trans('messages.we_are_temporarily_unavailable_in_this_area')], 403);
          return response()->json(['zone_id'=>1], 200);
     }
-    public function place_api_autocomplete(request $request)
+    /*public function place_api_autocomplete(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'search_text = >'required,
+            'search_text' => 'required',
         ]);
 
         if($validator->errors()->count()>0){
@@ -66,13 +66,13 @@ class ConfigController extends Controller
                 ['errors' => Helpers::error_processor($validator)],
                 403);
         }
-        $respons4 = Http::get(
-            https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
-            •$request ['search_text ']
-            .'Skey='
+        $response = Http::get(
+            'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
+            .$request['search_text']
+            .'&key='
             .'AIzaSyCMESvjp3G5FtPnukZ28_GVOuFSvEhSS9c'
-        );
+             );
         return $response->json();
         
-    }
+    }*/
 }
