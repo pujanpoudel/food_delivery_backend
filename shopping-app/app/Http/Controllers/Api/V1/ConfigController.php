@@ -26,7 +26,7 @@ class ConfigController extends Controller
        
         $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='
         .$request->lat.','.$request->lng
-        .'&key='."AIzaSyBjHyFgZqynxUbrXB3Tfgionz6sfk7phUQ");
+        .'&key='.env('GMAP_API_KEY'));
         return $response->json();
     }
         public function get_zone(Request $request)
@@ -69,6 +69,26 @@ class ConfigController extends Controller
         $response = Http::get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
             .$request['search_text']
+            .'&key='
+            .env('GMAP_API_KEY')
+             );
+        return $response->json();
+        
+    }
+    public function place_api_details(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'placeid' => 'required',
+        ]);
+
+        if($validator->errors()->count()>0){
+            return response()->json(
+                ['errors' => Helpers::error_processor($validator)],
+                403);
+        }
+        $response = Http::get(
+            'https://maps.googleapis.com/maps/api/place/details/json?placeid='
+            .$request['placeid']
             .'&key='
             .env('GMAP_API_KEY')
              );
