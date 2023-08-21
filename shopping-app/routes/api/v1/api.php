@@ -40,11 +40,12 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::put('update/{id}', 'CustomerController@update_address');
             Route::delete('delete', 'CustomerController@delete_address');
         });
-        Route::group(['prefix' => 'order'], function(){
-            Route::post('place','OrderController@place_order');
-        });
+        // Route::group(['prefix' => 'order'], function(){
+        //     Route::post('place','OrderController@place_order');
+        // });
             
             Route::group(['prefix' => 'order'], function () {
+            Route::post('place','OrderController@place_order');
             Route::get('list', 'OrderController@get_order_list');
             Route::get('running-orders', 'OrderController@get_running_orders');
             Route::get('details', 'OrderController@get_order_details');

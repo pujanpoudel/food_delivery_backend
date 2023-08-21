@@ -63,7 +63,7 @@ class PaypalPaymentController extends Controller
 
         $amount = new Amount();
      
-        $amount->setCurrency("NPR")//Helpers::currency_code
+        $amount->setCurrency(Helpers::currency_code)
             ->setTotal($number);
         \session()->put('transaction_reference', $tr_ref);
         $transaction = new Transaction();
