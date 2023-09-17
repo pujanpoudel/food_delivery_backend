@@ -22,7 +22,9 @@ class Helpers
     {
         $config = null;
         $paymentmethod = BusinessSetting::where('key',$name)->first();
+
         if($paymentmethod){
+
             $config = json_decode(json_encode($paymentmethod->value), true);
             $config = json_decode($config, true);
         }

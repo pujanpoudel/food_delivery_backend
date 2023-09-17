@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -92,6 +93,16 @@ class ProductController extends Controller
                 ];
                 
          return response()->json($data, 200);
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        $products = Food::where('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+        
+        return response()->json(['products' => $products]);
     }
 
 }

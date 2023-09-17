@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 use App\Models\Zone;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -25,8 +24,7 @@ class ConfigController extends Controller
         }
        
         $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='
-        .$request->lat.','.$request->lng
-        .'&key='.env('GMAP_API_KEY'));
+        .$request->lat.','.$request->lng.'&key='.env('GMAP_API_KEY'));
         return $response->json();
     }
         public function get_zone(Request $request)

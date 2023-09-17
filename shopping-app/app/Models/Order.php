@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -28,5 +27,13 @@ class Order extends Model
     public function details()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+    public function scopeNotpos($query)
+    {
+        return $query->where('order_type','<>','pos');
+    }
+    public function user()
+    {
+        return $this->hasbelongsTo(User::class, 'user_id');
     }
 }

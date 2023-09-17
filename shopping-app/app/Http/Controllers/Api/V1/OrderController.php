@@ -68,13 +68,13 @@ class OrderController extends Controller
                 } else {
                     return response()->json([
                         'errors' => [
-                            ['code' => 'food', 'message' => 'not found!']
-                        ]
-                    ], 401);
+                            ['code' => 'food', 'message
                 }
         }
 
-
+' => 'not found!']
+                        ]
+                    ], 401);
         try {
             $save_order= $order->id;
             $total_price= $product_price;

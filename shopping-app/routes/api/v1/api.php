@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/products/search', 'ProductController@search');
 
 Route::group(['namespace' => 'Api\V1'], function () {
     
@@ -40,6 +41,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::put('update/{id}', 'CustomerController@update_address');
             Route::delete('delete', 'CustomerController@delete_address');
         });
+        
         // Route::group(['prefix' => 'order'], function(){
         //     Route::post('place','OrderController@place_order');
         // });
