@@ -45,6 +45,23 @@ class OrderController extends Controller
         $order->pending = now(); //checked
         $order->created_at = now(); //checked
         $order->updated_at = now();//checked
+        $order->order_type = $request['order_type'];
+
+        $order->payment_status = $request['payment_method']=='wallet'?'paid':unpaid;
+        $order->order_status = $request['payment_method']=='digital_payment'?'failed':
+        ($request->payment_method == 'wallet'?'confirmed':'pending');
+        $order->payment_method =$request->payment_method;
+        $scheduled_at =$request->scheduled_at?\Carbon\Carbon::parse($request->scheduled_at):now();
+        if($request->scheduled_at && $scheduled_-at <now())
+        {
+            return response()->json([
+            'errors'=>[
+                    [ 'code'=> 'order_time', 'message' =>trans('messages.you_can_not_schedule_a_order_in_past')]
+            ] 
+            ], 406);
+        }
+        $order->scheduled_at - $scheduled_at;
+        $order->scheduled =$request->scheduled_at?1:0;
         
         foreach ($request['cart'] as $c) {
      
@@ -68,13 +85,13 @@ class OrderController extends Controller
                 } else {
                     return response()->json([
                         'errors' => [
-                            ['code' => 'food', 'message
+                            ['code' => 'food', 'message' => 'not found!']
+                        ]
+                    ], 401);
                 }
         }
 
-' => 'not found!']
-                        ]
-                    ], 401);
+
         try {
             $save_order= $order->id;
             $total_price= $product_price;
