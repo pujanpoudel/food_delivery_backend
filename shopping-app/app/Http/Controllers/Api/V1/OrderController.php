@@ -14,6 +14,8 @@ class OrderController extends Controller
 {
         public function place_order(Request $request)
     {
+        return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+
         $validator = Validator::make($request->all(), [
             'order_amount' => 'required',
             'address' => 'required_if:order_type,delivery',
@@ -113,7 +115,7 @@ class OrderController extends Controller
                 'total_ammount' => $total_price,
                 
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([$e], 403);
         }
 
